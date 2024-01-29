@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 const frameMetadata = getFrameMetadata({
   buttons: ['Roast my PFP'],
-  image: 'frame-start.png',
+  image: `${process.env.NEXT_PUBLIC_URL}/frame-start.png`,
   post_url: `${process.env.NEXT_PUBLIC_URL}/api/frame`,
 });
 
