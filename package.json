@@ -2,10 +2,10 @@
   "name": "roast-my-pfp-frame",
   "version": "0.1.0",
   "scripts": {
-    "build": "rm -rf .next && next build",
-    "dev": "next dev",
+    "build": "NODE_ENV=production next build",
+    "start": "NODE_ENV=production next start",
+    "dev": "NODE_ENV=development next dev",
     "format": "prettier --log-level warn --write .",
-    "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
