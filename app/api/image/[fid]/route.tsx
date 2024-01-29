@@ -19,7 +19,8 @@ const bgImg = fetch(new URL('../../../../public/frame-roast-bg.png', import.meta
  */
 export async function GET(req: NextRequest) {
   const fidWithExt = req.nextUrl.searchParams.get('fid');
-  if (!fidWithExt || fidWithExt?.split('.png')?.length !== 2) return NextResponse.json({ error: 'Bad Request' }, { status: 400 });
+  if (!fidWithExt || fidWithExt?.split('.png')?.length !== 2)
+    return NextResponse.json({ error: 'Bad Request' }, { status: 400 });
   const fid = fidWithExt?.split('.png')[0];
   if (!fid) return NextResponse.json({ error: 'Bad Request' }, { status: 400 });
 
@@ -65,17 +66,17 @@ export async function GET(req: NextRequest) {
 
   return new ImageResponse(
     (
-      <div tw="flex h-full w-full items-center justify-center">
+      <div tw="bg-black flex h-full w-full items-center justify-center">
         {/* eslint-disable-next-line */}
-        <img src={bgImgData} width={1801} height={943} tw="absolute inset-0" />
+        <img src={bgImgData} width={1801} height={943} tw="absolute inset-0 top-[-20px]" />
         <img
           src={avatarUrl}
           width={260}
           height={260}
-          tw="absolute top-[90px] left-1/2 rounded-full ml-[-130px]"
+          tw="absolute top-[70px] left-1/2 rounded-full ml-[-130px]"
         />
 
-        <div tw="flex flex-col items-center justify-end items-center justify-center absolute bottom-[50px] inset-x-[50px]">
+        <div tw="flex flex-col items-center justify-end items-center justify-center absolute bottom-[100px] inset-x-[50px]">
           <p tw="text-[45px] text-center mb-2 text-white/50" style={{ fontFamily: 'Roboto Mono' }}>
             @{username}
           </p>
