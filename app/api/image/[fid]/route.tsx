@@ -18,7 +18,9 @@ const bgImg = fetch(new URL('../../../../public/frame-roast-bg.png', import.meta
  * Returns an og-image for the domain (PNG).
  */
 export async function GET(req: NextRequest) {
-  const fid = req.nextUrl.searchParams.get('fid');
+  const fidWithExt = req.nextUrl.searchParams.get('fid');
+  if (!fidWithExt || fidWithExt?.split('.png')?.length !== 2) return NextResponse.json({ error: 'Bad Request' }, { status: 400 });
+  const fid = fidWithExt?.split('.png')[0];
   if (!fid) return NextResponse.json({ error: 'Bad Request' }, { status: 400 });
 
   // Fetch avatar url for user
