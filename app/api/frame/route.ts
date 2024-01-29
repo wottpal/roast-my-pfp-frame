@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 const FALLBACK_RESPONSE = `
 <!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="${process.env.NEXT_PUBLIC_URL}/frame-roast-bg.png" />
+    <meta property="fc:frame:image" content="${process.env.NEXT_PUBLIC_URL}/frame-start.png" />
     <meta property="fc:frame:button:1" content="Roast my PFP" />
     <meta property="fc:frame:post_url" content="${process.env.NEXT_PUBLIC_URL}/api/frame" />
 </head></html>
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        api_key: 'process.env.NEYNAR_API_KEY',
+        api_key: process.env.NEYNAR_API_KEY as string,
       },
     },
   );
