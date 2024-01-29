@@ -21,17 +21,14 @@ export async function POST(req: NextRequest): Promise<Response> {
     if (!message?.data?.fid) throw new Error('No fid');
     fid = message?.data?.fid;
     if (!message?.data?.frameActionBody?.castId?.hash) throw new Error('No cast hash');
-    castHash = message?.data?.frameActionBody?.castId?.hash as any as string;
+    const castHashUint8Array = message?.data?.frameActionBody?.castId?.hash;
+    castHash = Buffer.from(castHashUint8Array).toString('hex');
   } catch (err) {
     console.error(err);
     return new NextResponse(FALLBACK_RESPONSE);
   }
 
   // Get users that recasted this frame
-  console.log(
-    'Fetching:',
-    `https://api.neynar.com/v2/farcaster/cast?type=hash&identifier=${castHash}`,
-  );
   const neynarResponse = await fetch(
     `https://api.neynar.com/v2/farcaster/cast?type=hash&identifier=${castHash}`,
     {
@@ -47,8 +44,10 @@ export async function POST(req: NextRequest): Promise<Response> {
   const neynarResponseJson = await neynarResponse.json();
   console.log('Neynar response:', neynarResponseJson);
   const recasts = neynarResponseJson?.cast?.reactions?.recasts;
+  console.log('Recasts:', recasts);
   if (!recasts?.length) return new NextResponse(FALLBACK_RESPONSE);
   const hasRecasted = recasts.some((recast: any) => recast?.fid === fid);
+  console.log('Has recasted:', hasRecasted);
   if (!hasRecasted) return new NextResponse(FALLBACK_RESPONSE);
 
   return new NextResponse(`<!DOCTYPE html><html><head>
