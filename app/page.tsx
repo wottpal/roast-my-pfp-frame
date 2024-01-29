@@ -2,18 +2,19 @@ import { getFrameMetadata } from '@coinbase/onchainkit';
 import type { Metadata } from 'next';
 
 const frameMetadata = getFrameMetadata({
-  buttons: ['Next image'],
-  image: 'https://zizzamia.xyz/park-1.png',
-  post_url: 'https://zizzamia.xyz/api/frame',
+  buttons: ['Roast my PFP'],
+  image: 'frame-start.png',
+  post_url: `${process.env.NEXT_PUBLIC_URL}/api/frame`,
 });
 
 export const metadata: Metadata = {
-  title: 'zizzamia.xyz',
-  description: 'LFG',
+  title: 'Roast my PFP',
+  description: 'Made by @dennis',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL!),
   openGraph: {
-    title: 'zizzamia.xyz',
-    description: 'LFG',
-    images: ['https://zizzamia.xyz/park-1.png'],
+    title: 'Roast my PFP',
+    description: 'Made by @dennis',
+    images: [`/frame-start.png`],
   },
   other: {
     ...frameMetadata,
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1>zizzamia.xyz</h1>
+      <h1>Roast my PFP</h1>
     </>
   );
 }
